@@ -55,11 +55,12 @@ handleIncrease=(product)=>{
 
  }
 
+
  handleDecrease=(product)=>{
     const {products}=this.state;
     let index=products.indexOf(product);
 
-   if(products[index].qty==0){
+   if(products[index].qty===0){
     return;
    }
 
@@ -69,16 +70,21 @@ handleIncrease=(product)=>{
     })
   }
 
-  
+  handleDelete=(id)=>{
+    const {products}= this.state;
+    let newProducts=products.filter((item)=>{
+        return item.id!=id;
+    })
+    this.setState({
+        products:newProducts
+    })
+
+  }
+
 
    
     render(){
         const {products}= this.state;
-
-        
-       
-        
-
 
         return(
             <div className='cart'>
@@ -90,6 +96,7 @@ handleIncrease=(product)=>{
                        key={item.id} 
                        handleIncrease={this.handleIncrease}
                        handleDecrease={this.handleDecrease}
+                       handleDelete={this.handleDelete}
                        />
                        );
                     })
