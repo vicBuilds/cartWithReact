@@ -1,6 +1,7 @@
 import Cart from './cart';
 import Navbar from './navbar';
 import React from 'react';
+import TotalItems from './totalPrice';
 
 class App extends React.Component{
 
@@ -95,23 +96,50 @@ class App extends React.Component{
         return count;
       }
 
+      getTotalPrice=()=>{
+        
+        const {products}=this.state;
+        
+        let total=0;
+
+        products.forEach((item)=>{
+          total+=(item.qty*item.price);
+        })
+
+        return total;
+
+      }
+
 
 
     render(){
       return (
         <div className="App">
-
+          
           <Navbar 
-            count={this.getCartCount()}
-          />
+                count={this.getCartCount()}
+              />
 
-          <Cart 
-          products={this.state.products}
-          handleIncrease={this.handleIncrease}
-          handleDecrease={this.handleDecrease}
-          handleDelete={this.handleDelete}
+          <div className='main-container'>
 
-          />
+              <div className='left-block'>
+
+                  <Cart 
+                    products={this.state.products}
+                    handleIncrease={this.handleIncrease}
+                    handleDecrease={this.handleDecrease}
+                    handleDelete={this.handleDelete}
+                  />
+
+              </div>
+
+              <div className='right-block'>
+                
+                  <TotalItems total={this.getTotalPrice()}/>
+
+            </div>
+
+         </div>
 
         </div>
       );
