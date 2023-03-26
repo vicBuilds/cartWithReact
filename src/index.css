@@ -27,7 +27,7 @@ body {
 .cart{
   display:flex;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
 }
 .navBar{
   display: flex;
